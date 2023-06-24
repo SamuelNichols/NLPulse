@@ -1,5 +1,3 @@
-import logging
-import datetime
 import interactions
 from constants import EXTENSIONS
 
@@ -7,8 +5,11 @@ from constants import EXTENSIONS
 class Core(interactions.Extension):
     def __init__(self, client: interactions.Client) -> None:
         self.client: interactions.Client = client
-        [self.client.load_extension(extension) for extension in EXTENSIONS]
+        for extension in EXTENSIONS:
+            self.client.load_extension(extension)
 
 
 def setup(client) -> None:
-    print("loaded all extensions")
+    Core(client)
+    print("all extensions loaded")
+    
